@@ -36,6 +36,7 @@ var opts struct {
 	CollectorPort string `short:"p" long:"port" description:"port number of the target netflow collector"`
 	SpikeProto    string `short:"s" long:"spike" description:"run a second thread generating a spike for the specified protocol"`
 	Help          bool   `short:"h" long:"help" description:"show nflow-generator help"`
+	SleepMillis   int    `short:"m" long:"millis" description:"fixed sleep time between netflow batches (in milliseconds)" default:"-1"`
 }
 
 func main() {
@@ -66,7 +67,7 @@ func main() {
 		"Use ctrl^c to terminate the app.", opts.CollectorIP, opts.CollectorPort)
 
 	for {
-		rand.Seed(time.Now().Unix())
+		rand.Seed(time.Now().UnixNano())
 		n := randomNum(50, 1000)
 		// add spike data
 		if opts.SpikeProto != "" {
@@ -88,11 +89,17 @@ func main() {
 			}
 		}
 		// add some periodic spike data
-		if n < 150 {
+		if opts.SleepMillis < 0 && n < 150 {
 			sleepInt := time.Duration(3000)
 			time.Sleep(sleepInt * time.Millisecond)
 		}
-		sleepInt := time.Duration(n)
+
+		var sleepInt time.Duration
+		if opts.SleepMillis < 0 {
+			sleepInt = time.Duration(n)
+		} else {
+			sleepInt = time.Duration(opts.SleepMillis)
+		}
 		time.Sleep(sleepInt * time.Millisecond)
 	}
 }
@@ -109,8 +116,9 @@ Usage:
 
 Application Options:
   -t, --target= target ip address of the netflow collector
-  -p, --port=   port number of the target netflow collector
-  -s, --spike run a second thread generating a spike for the specified protocol
+  -p, --port= port number of the target netflow collector
+  -m, --millis= fixed sleep time between netflow batches (in milliseconds)
+  -s, --spike= run a second thread generating a spike for the specified protocol
     protocol options are as follows:
         ftp - generates tcp/21
         ssh  - generates tcp/22
