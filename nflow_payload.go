@@ -98,13 +98,7 @@ func GenerateNetflow(recordCount int) Netflow {
 	data := new(Netflow)
 	header := CreateNFlowHeader(recordCount)
 	records := []NetflowPayload{}
-	if recordCount == 8 {
-		// overwrite payload to add some variations for traffic spikes.
-		records = CreateVariablePayload(recordCount)
-	} else {
-		records = CreateNFlowPayload(recordCount)
-	}
-
+	records = CreateNFlowPayloadRandomOnly(recordCount)
 	data.Header = header
 	data.Records = records
 	return *data
@@ -168,6 +162,14 @@ func CreateNFlowPayload(recordCount int) []NetflowPayload {
   payload[14] = CreateIcmpFlow()
   payload[15] = CreateRandomFlow()
   return payload
+}
+
+func CreateNFlowPayloadRandomOnly(recordCount int) []NetflowPayload {
+	payload := make([]NetflowPayload, recordCount)
+	for i := 0; i < recordCount; i++ {
+		payload[i] = CreateRandomFlow()
+	}
+	return payload
 }
 
 //Initialize netflow record with random data
