@@ -138,41 +138,36 @@ func CreateNFlowHeader(recordCount int) NetflowHeader {
 
 func CreateVariablePayload(recordCount int) []NetflowPayload {
 	payload := make([]NetflowPayload, recordCount)
-
-	for i := 0; i < recordCount; i++ {
-		payload[0] = CreateHttpFlow()
-		payload[1] = CreateHttpsFlow()
-		payload[2] = CreateHttpAltFlow()
-		payload[3] = CreateDnsFlow()
-		payload[5] = CreateNtpFlow()
-		payload[6] = CreateImapsFlow()
-		payload[7] = CreateMySqlFlow()
-	}
-
+	payload[0] = CreateHttpFlow()
+	payload[1] = CreateHttpsFlow()
+	payload[2] = CreateHttpAltFlow()
+	payload[3] = CreateDnsFlow()
+	payload[5] = CreateNtpFlow()
+	payload[6] = CreateImapsFlow()
+	payload[7] = CreateMySqlFlow()
 	return payload
 }
 
 func CreateNFlowPayload(recordCount int) []NetflowPayload {
 	payload := make([]NetflowPayload, recordCount)
-	for i := 0; i < recordCount; i++ {
-		payload[0] = CreateHttpFlow()
-		payload[1] = CreateHttpsFlow()
-		payload[2] = CreateHttpAltFlow()
-		payload[3] = CreateDnsFlow()
-		payload[4] = CreateIcmpFlow()
-		payload[5] = CreateNtpFlow()
-		payload[6] = CreateImapsFlow()
-		payload[7] = CreateMySqlFlow()
-		payload[8] = CreateRandomFlow()
-		payload[9] = CreateSshFlow()
-		payload[10] = CreateP2pFlow()
-		payload[11] = CreateBitorrentFlow()
-		payload[12] = CreateFTPFlow()
-		payload[13] = CreateSnmpFlow()
-		payload[14] = CreateIcmpFlow()
-		payload[15] = CreateRandomFlow()
-	}
-	return payload
+  payload[0] = CreateHttpFlow()
+  payload[1] = CreateHttpsFlow()
+  payload[2] = CreateHttpAltFlow()
+  payload[3] = CreateDnsFlow()
+  // TODO maybe remove this
+  payload[4] = CreateIcmpFlow()
+  payload[5] = CreateNtpFlow()
+  payload[6] = CreateImapsFlow()
+  payload[7] = CreateMySqlFlow()
+  payload[8] = CreateRandomFlow()
+  payload[9] = CreateSshFlow()
+  payload[10] = CreateP2pFlow()
+  payload[11] = CreateBitorrentFlow()
+  payload[12] = CreateFTPFlow()
+  payload[13] = CreateSnmpFlow()
+  payload[14] = CreateIcmpFlow()
+  payload[15] = CreateRandomFlow()
+  return payload
 }
 
 //Initialize netflow record with random data
