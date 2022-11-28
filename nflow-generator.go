@@ -68,12 +68,13 @@ func main() {
 	for {
 		rand.Seed(time.Now().Unix())
 		n := randomNum(50, 1000)
+		n=910
 		// add spike data
 		if opts.SpikeProto != "" {
 			GenerateSpike()
 		}
 		if n > 900 {
-			data := GenerateNetflow(8)
+			data := GenerateNetflow(1000)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
