@@ -68,7 +68,6 @@ func main() {
 	for {
 		rand.Seed(time.Now().Unix())
 		n := randomNum(50, 1000)
-        n = 910
 		// add spike data
 		if opts.SpikeProto != "" {
 			GenerateSpike()
