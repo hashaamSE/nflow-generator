@@ -68,7 +68,7 @@ func main() {
 	for {
 		rand.Seed(time.Now().Unix())
 		n := randomNum(50, 1000)
-		n=910
+		n := 910
 		// add spike data
 		if opts.SpikeProto != "" {
 			GenerateSpike()
@@ -89,10 +89,10 @@ func main() {
 			}
 		}
 		// add some periodic spike data
-// 		if n < 150 {
-// 			sleepInt := time.Duration(3000)
-// 			time.Sleep(sleepInt * time.Millisecond)
-// 		}
+		if n < 150 {
+			sleepInt := time.Duration(3000)
+			time.Sleep(sleepInt * time.Millisecond)
+		}
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
