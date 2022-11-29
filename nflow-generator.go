@@ -74,14 +74,14 @@ func main() {
 			GenerateSpike()
 		}
 		if n > 900 {
-			data := GenerateNetflow(8)
+			data := GenerateNetflow(256)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
 				log.Fatal("Error connectiong to the target collector: ", err)
 			}
 		} else {
-			data := GenerateNetflow(16)
+			data := GenerateNetflow(256)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
