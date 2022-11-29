@@ -75,7 +75,6 @@ func main() {
 		}
 		if n > 900 {
 			data := GenerateNetflow(8)
-			print(type(data))
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
