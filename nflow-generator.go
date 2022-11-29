@@ -74,7 +74,7 @@ func main() {
 			GenerateSpike()
 		}
 		if n > 900 {
-			data := GenerateNetflow(1)
+			data := GenerateNetflow(8)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
