@@ -74,7 +74,8 @@ func main() {
 			GenerateSpike()
 		}
 		if n > 900 {
-			data := GenerateNetflow(1000)
+			data := GenerateNetflow(8)
+			print(type(data))
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
@@ -89,10 +90,10 @@ func main() {
 			}
 		}
 		// add some periodic spike data
-		if n < 150 {
-			sleepInt := time.Duration(3000)
-			time.Sleep(sleepInt * time.Millisecond)
-		}
+// 		if n < 150 {
+// 			sleepInt := time.Duration(3000)
+// 			time.Sleep(sleepInt * time.Millisecond)
+// 		}
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
