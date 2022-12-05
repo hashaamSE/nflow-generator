@@ -85,6 +85,7 @@ func BuildNFlowPayload(data Netflow) bytes.Buffer {
 
 //Generate a netflow packet w/ user-defined record count
 func GenerateNetflow(recordCount int) Netflow {
+    log.Infof("Record Count: %s\n",recordCount)
 	data := new(Netflow)
 	header := CreateNFlowHeader(recordCount)
 	records := []NetflowPayload{}
@@ -92,9 +93,10 @@ func GenerateNetflow(recordCount int) Netflow {
 		// overwrite payload to add some variations for traffic spikes.
 		records = CreateVariablePayload(recordCount)
 	} else {
+	    log.Infof("Variable Payload")
 		records = CreateNFlowPayload(recordCount)
 	}
-
+    log.Infof("Records: %s\n",records)
 	data.Header = header
 	data.Records = records
 	return *data
@@ -151,6 +153,8 @@ func CreateNFlowPayload(recordCount int) []NetflowPayload {
 // 		payload[i] = CreateIcmpFlow()
 // 		payload[i] = CreateRandomFlow()
 	}
+	
+	log.Infof("Payload: %s\n",payload)
 	return payload
 }
 
