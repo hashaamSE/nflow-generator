@@ -64,39 +64,49 @@ func main() {
 	}
 	log.Infof("sending netflow data to a collector ip: %s and port: %s. \n"+
 		"Use ctrl^c to terminate the app.", opts.CollectorIP, opts.CollectorPort)
-
+    log.Infof("I am here 1!")
 	for {
-		rand.Seed(time.Now().Unix())
+	    log.Infof("I am here 2!")
+		// rand.Seed(time.Now().Unix())
 		// n := randomNum(50, 1000)
 		n := 910
+		log.Infof("I am here 3!")
 		// add spike data
-		if opts.SpikeProto != "" {
-			GenerateSpike()
-		}
-		if n > 900 {
-		    log.Infof("I am here!")
-			data := GenerateNetflow(32)
-			buffer := BuildNFlowPayload(data)
-			_, err := conn.Write(buffer.Bytes())
-			if err != nil {
-				log.Fatal("Error connecting to the target collector: ", err)
-			}
-		} else {
-			data := GenerateNetflow(16)
-			buffer := BuildNFlowPayload(data)
-			_, err := conn.Write(buffer.Bytes())
-			if err != nil {
-				log.Fatal("Error connecting to the target collector: ", err)
-			}
-		}
+// 		if opts.SpikeProto != "" {
+// 			GenerateSpike()
+// 		}
+        data := GenerateNetflow(32)
+        buffer := BuildNFlowPayload(data)
+        _, err := conn.Write(buffer.Bytes())
+        if err != nil {
+            log.Fatal("Error connecting to the target collector: ", err)
+        }
+        log.Infof("I am here 4!")
+// 		if n > 900 {
+// 		    log.Infof("I am here!")
+// 			data := GenerateNetflow(32)
+// 			buffer := BuildNFlowPayload(data)
+// 			_, err := conn.Write(buffer.Bytes())
+// 			if err != nil {
+// 				log.Fatal("Error connecting to the target collector: ", err)
+// 			}
+// 		} else {
+// 			data := GenerateNetflow(16)
+// 			buffer := BuildNFlowPayload(data)
+// 			_, err := conn.Write(buffer.Bytes())
+// 			if err != nil {
+// 				log.Fatal("Error connecting to the target collector: ", err)
+// 			}
+// 		}
 		// add some periodic spike data
-		if n < 150 {
-			sleepInt := time.Duration(3000)
-			time.Sleep(sleepInt * time.Millisecond)
-		}
+// 		if n < 150 {
+// 			sleepInt := time.Duration(3000)
+// 			time.Sleep(sleepInt * time.Millisecond)
+// 		}
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
+	log.Infof("I am here 5!")
 }
 
 func randomNum(min, max int) int {
