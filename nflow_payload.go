@@ -137,23 +137,23 @@ func CreateVariablePayload(recordCount int) []NetflowPayload {
 func CreateNFlowPayload(recordCount int) []NetflowPayload {
 	payload := make([]NetflowPayload, recordCount)
 	for i := 0; i < recordCount; i++ {
-// 		payload[i] = CreateHttpFlow()
-// 		payload[i] = CreateHttpsFlow()
-// 		payload[i] = CreateHttpAltFlow()
-// 		payload[i] = CreateDnsFlow()
-// 		payload[i] = CreateNtpFlow()
-// 		payload[i] = CreateImapsFlow()
-// 		payload[i] = CreateMySqlFlow()
-// 		payload[i] = CreateRandomFlow()
-// 		payload[i] = CreateSshFlow()
-// 		payload[i] = CreateP2pFlow()
-// 		payload[i] = CreateBitorrentFlow()
-// 		payload[i] = CreateFTPFlow()
-		payload[i] = CreateSnmpFlow()
-// 		payload[i] = CreateIcmpFlow()
-// 		payload[i] = CreateRandomFlow()
+		payload[0] = CreateHttpFlow()
+		payload[1] = CreateHttpsFlow()
+		payload[2] = CreateHttpAltFlow()
+		payload[3] = CreateDnsFlow()
+		payload[4] = CreateNtpFlow()
+		payload[5] = CreateImapsFlow()
+		payload[6] = CreateMySqlFlow()
+		payload[7] = CreateRandomFlow()
+		payload[8] = CreateSshFlow()
+		payload[9] = CreateP2pFlow()
+		payload[10] = CreateBitorrentFlow()
+		payload[11] = CreateFTPFlow()
+		payload[12] = CreateSnmpFlow()
+		payload[13] = CreateIcmpFlow()
+		payload[14] = CreateRandomFlow()
 	}
-	
+
 	log.Infof("Payload: %s\n",payload)
 	return payload
 }
