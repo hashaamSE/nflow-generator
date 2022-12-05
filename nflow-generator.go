@@ -64,13 +64,14 @@ func main() {
 	}
 	log.Infof("sending netflow data to a collector ip: %s and port: %s. \n"+
 		"Use ctrl^c to terminate the app.", opts.CollectorIP, opts.CollectorPort)
+    log.Infof("Ver 2!")
     log.Infof("I am here 1!")
 	for {
 	    log.Infof("I am here 2!")
 		// rand.Seed(time.Now().Unix())
 		// n := randomNum(50, 1000)
 		n := 910
-		log.Infof("I am here 3!")
+
 		// add spike data
 // 		if opts.SpikeProto != "" {
 // 			GenerateSpike()
@@ -81,7 +82,7 @@ func main() {
         if err != nil {
             log.Fatal("Error connecting to the target collector: ", err)
         }
-        log.Infof("I am here 4!")
+
 // 		if n > 900 {
 // 		    log.Infof("I am here!")
 // 			data := GenerateNetflow(32)
