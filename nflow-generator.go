@@ -76,7 +76,7 @@ func main() {
 // 		if opts.SpikeProto != "" {
 // 			GenerateSpike()
 // 		}
-        data := GenerateNetflow(16)
+        data := GenerateNetflow(24)
         buffer := BuildNFlowPayload(data)
         _, err := conn.Write(buffer.Bytes())
         if err != nil {
