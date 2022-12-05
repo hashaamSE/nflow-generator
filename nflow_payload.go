@@ -93,7 +93,7 @@ func GenerateNetflow(recordCount int) Netflow {
 		// overwrite payload to add some variations for traffic spikes.
 		records = CreateVariablePayload(recordCount)
 	} else {
-	    log.Infof("Variable Payload")
+	    log.Infof("Static Payload")
 		records = CreateNFlowPayload(recordCount)
 	}
     log.Infof("Records: %s\n",records)
@@ -151,17 +151,13 @@ func CreateNFlowPayload(recordCount int) []NetflowPayload {
     payload[12] = CreateSnmpFlow()
     payload[13] = CreateIcmpFlow()
     payload[14] = CreateRandomFlow()
-    payload[15] = CreateRandomFlow()
-    payload[16] = CreateRandomFlow()
-    payload[17] = CreateRandomFlow()
-    payload[18] = CreateRandomFlow()
-    payload[19] = CreateRandomFlow()
-    payload[20] = CreateRandomFlow()
-    payload[21] = CreateRandomFlow()
-    payload[22] = CreateRandomFlow()
 
+    i:=14
+    for i := 15; i < recordCount; i++{
+        payload[i] = CreateRandomFlow()
+    }
 
-	log.Infof("Payload: %s\n",payload)
+	//log.Infof("Payload: %s\n",payload)
 	return payload
 }
 

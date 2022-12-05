@@ -69,14 +69,14 @@ func main() {
 	for {
 	    log.Infof("I am here 2!")
 		// rand.Seed(time.Now().Unix())
-		n := randomNum(50, 1000)
+		//n := randomNum(50, 1000)
 // 		n := 910
 
 		// add spike data
 // 		if opts.SpikeProto != "" {
 // 			GenerateSpike()
 // 		}
-        data := GenerateNetflow(24)
+        data := GenerateNetflow(32)
         buffer := BuildNFlowPayload(data)
         _, err := conn.Write(buffer.Bytes())
         if err != nil {
@@ -104,7 +104,7 @@ func main() {
 // 			sleepInt := time.Duration(3000)
 // 			time.Sleep(sleepInt * time.Millisecond)
 // 		}
-		sleepInt := time.Duration(n)
+		sleepInt := time.Duration(1000)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
 	log.Infof("I am here 5!")
