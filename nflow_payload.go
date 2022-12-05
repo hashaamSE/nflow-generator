@@ -151,10 +151,22 @@ func CreateNFlowPayload(recordCount int) []NetflowPayload {
     payload[12] = CreateSnmpFlow()
     payload[13] = CreateIcmpFlow()
     payload[14] = CreateRandomFlow()
-
-    for i := 15; i < recordCount; i++{
-        payload[i] = CreateRandomFlow()
-    }
+    payload[15] = CreateRandomFlow()
+    payload[16] = CreateRandomFlow()
+    payload[17] = CreateRandomFlow()
+    payload[18] = CreateRandomFlow()
+    payload[19] = CreateRandomFlow()
+    payload[20] = CreateRandomFlow()
+    payload[21] = CreateRandomFlow()
+    payload[22] = CreateRandomFlow()
+    payload[23] = CreateRandomFlow()
+    payload[24] = CreateRandomFlow()
+    payload[25] = CreateRandomFlow()
+    payload[26] = CreateRandomFlow()
+    payload[27] = CreateRandomFlow()
+    payload[28] = CreateRandomFlow()
+    payload[29] = CreateRandomFlow()
+    payload[30] = CreateRandomFlow()
 
 	//log.Infof("Payload: %s\n",payload)
 	return payload
