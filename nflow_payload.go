@@ -165,6 +165,8 @@ func CreateNFlowPayload(recordCount int) []NetflowPayload {
     payload[26] = CreateRandomFlow()
     payload[27] = CreateRandomFlow()
     payload[28] = CreateRandomFlow()
+    payload[29] = CreateRandomFlow()
+    payload[30] = CreateRandomFlow()
 
 	//log.Infof("Payload: %s\n",payload)
 	return payload
