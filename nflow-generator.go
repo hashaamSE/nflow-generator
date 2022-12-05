@@ -69,7 +69,7 @@ func main() {
 	for {
 	    log.Infof("I am here 2!")
 		// rand.Seed(time.Now().Unix())
-		//n := randomNum(50, 1000)
+		n := randomNum(50, 1000)
 // 		n := 910
 
 		// add spike data
@@ -104,7 +104,7 @@ func main() {
 // 			sleepInt := time.Duration(3000)
 // 			time.Sleep(sleepInt * time.Millisecond)
 // 		}
-		sleepInt := time.Duration(1000)
+		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
 	log.Infof("I am here 5!")
