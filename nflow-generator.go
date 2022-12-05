@@ -64,7 +64,7 @@ func main() {
 	}
 	log.Infof("sending netflow data to a collector ip: %s and port: %s. \n"+
 		"Use ctrl^c to terminate the app.", opts.CollectorIP, opts.CollectorPort)
-    log.Infof("Ver 3!")
+    log.Infof("Ver 5!")
     log.Infof("I am here 1!")
 	for {
 	    log.Infof("I am here 2!")
