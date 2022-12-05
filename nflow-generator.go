@@ -67,24 +67,26 @@ func main() {
 
 	for {
 		rand.Seed(time.Now().Unix())
-		n := randomNum(50, 1000)
+		// n := randomNum(50, 1000)
+		n := 910
 		// add spike data
 		if opts.SpikeProto != "" {
 			GenerateSpike()
 		}
 		if n > 900 {
-			data := GenerateNetflow(8)
+		    log.Infof("I am here!")
+			data := GenerateNetflow(32)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
-				log.Fatal("Error connectiong to the target collector: ", err)
+				log.Fatal("Error connecting to the target collector: ", err)
 			}
 		} else {
 			data := GenerateNetflow(16)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
-				log.Fatal("Error connectiong to the target collector: ", err)
+				log.Fatal("Error connecting to the target collector: ", err)
 			}
 		}
 		// add some periodic spike data
