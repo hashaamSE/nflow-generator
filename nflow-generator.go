@@ -60,7 +60,7 @@ func main() {
 	}
 	conn, err := net.DialUDP("udp", nil, udpAddr)
 	if err != nil {
-		log.Fatal("Error connectiong to the target collector: ", err)
+		log.Fatal("Error connecting to the target collector: ", err)
 	}
 	log.Infof("sending netflow data to a collector ip: %s and port: %s. \n"+
 		"Use ctrl^c to terminate the app.", opts.CollectorIP, opts.CollectorPort)
@@ -68,7 +68,7 @@ func main() {
     log.Infof("I am here 1!")
 	for {
 	    log.Infof("I am here 2!")
-		rand.Seed(time.Now().Unix())
+// 		rand.Seed(time.Now().Unix())
 		n := randomNum(50, 1000)
 // 		n := 910
 
@@ -76,35 +76,35 @@ func main() {
 		if opts.SpikeProto != "" {
 			GenerateSpike()
 		}
-//         data := GenerateNetflow(30)
-//         buffer := BuildNFlowPayload(data)
-//         _, err := conn.Write(buffer.Bytes())
-//         if err != nil {
-//             log.Fatal("Error connecting to the target collector: ", err)
-//         }
+        data := GenerateNetflow(30)
+        buffer := BuildNFlowPayload(data)
+        _, err := conn.Write(buffer.Bytes())
+        if err != nil {
+            log.Fatal("Error connecting to the target collector: ", err)
+        }
 //         log.Infof("I am here 3!")
-		if n > 900 {
-		    log.Infof("I am here 3.1!")
-			data := GenerateNetflow(30)
-			buffer := BuildNFlowPayload(data)
-			_, err := conn.Write(buffer.Bytes())
-			if err != nil {
-				log.Fatal("Error connecting to the target collector: ", err)
-			}
-		} else {
-		    log.Infof("I am here 3.2!")
-			data := GenerateNetflow(30)
-			buffer := BuildNFlowPayload(data)
-			_, err := conn.Write(buffer.Bytes())
-			if err != nil {
-				log.Fatal("Error connecting to the target collector: ", err)
-			}
-		}
+// 		if n > 900 {
+// 		    log.Infof("I am here 3.1!")
+// 			data := GenerateNetflow(30)
+// 			buffer := BuildNFlowPayload(data)
+// 			_, err := conn.Write(buffer.Bytes())
+// 			if err != nil {
+// 				log.Fatal("Error connecting to the target collector: ", err)
+// 			}
+// 		} else {
+// 		    log.Infof("I am here 3.2!")
+// 			data := GenerateNetflow(30)
+// 			buffer := BuildNFlowPayload(data)
+// 			_, err := conn.Write(buffer.Bytes())
+// 			if err != nil {
+// 				log.Fatal("Error connecting to the target collector: ", err)
+// 			}
+// 		}
 // 		add some periodic spike data
-		if n < 150 {
-			sleepInt := time.Duration(3000)
-			time.Sleep(sleepInt * time.Millisecond)
-		}
+// 		if n < 150 {
+// 			sleepInt := time.Duration(3000)
+// 			time.Sleep(sleepInt * time.Millisecond)
+// 		}
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
