@@ -73,7 +73,7 @@ func main() {
 
 		if opts.HighFlow!=""{
             n := randomNum(10, 40)
-        }else{
+        } else {
             n := randomNum(50, 1000)
         }
 
@@ -82,15 +82,14 @@ func main() {
 			GenerateSpike()
 		}
 
-        if opts.HighFlow!=""{
+        if opts.HighFlow != "" {
             data := GenerateNetflow(30)
             buffer := BuildNFlowPayload(data)
             _, err := conn.Write(buffer.Bytes())
             if err != nil {
                 log.Fatal("Error connecting to the target collector: ", err)
             }
-        }
-        else {
+        } else {
             if n > 900 {
                 data := GenerateNetflow(8)
                 buffer := BuildNFlowPayload(data)
