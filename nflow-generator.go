@@ -70,7 +70,7 @@ func main() {
 
 	for {
 		rand.Seed(time.Now().Unix())
-        var n
+        var n = 1
 
 		// add spike data
 		if opts.SpikeProto != "" {
