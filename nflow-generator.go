@@ -69,7 +69,7 @@ func main() {
 	for {
 	    log.Infof("I am here 2!")
 // 		rand.Seed(time.Now().Unix())
-		n := randomNum(10, 50)
+		n := randomNum(5, 20)
 // 		n := 910
 
 		// add spike data
