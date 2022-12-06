@@ -34,7 +34,7 @@ const (
 var opts struct {
 	CollectorIP   string `short:"t" long:"target" description:"target ip address of the netflow collector"`
 	CollectorPort string `short:"p" long:"port" description:"port number of the target netflow collector"`
-	HighFlow      string `short:"h" long:"highflow" description:"bool variable to increase data flow of netflow-generator"`
+	MaxLoad       string `short:"m" long:"maxload" description:"bool variable to increase data flow of netflow-generator"`
 	SpikeProto    string `short:"s" long:"spike" description:"run a second thread generating a spike for the specified protocol"`
 	Help          bool   `short:"h" long:"help" description:"show nflow-generator help"`
 }
@@ -77,7 +77,7 @@ func main() {
 			GenerateSpike()
 		}
 
-        if opts.HighFlow != "" {
+        if opts.MaxLoad != "" {
             n = randomNum(10, 40)
             data := GenerateNetflow(30)
             buffer := BuildNFlowPayload(data)
@@ -126,7 +126,7 @@ Usage:
 Application Options:
   -t, --target= target ip address of the netflow collector
   -p, --port=   port number of the target netflow collector
-  -h, --highflow= bool variable (True/False) to increase the flow/min of netflow generator
+  -m, --maxload= bool variable (True/False) to increase the flow/min of netflow generator
   -s, --spike run a second thread generating a spike for the specified protocol
     protocol options are as follows:
         ftp - generates tcp/21
