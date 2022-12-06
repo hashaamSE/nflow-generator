@@ -110,7 +110,7 @@ func main() {
                 time.Sleep(sleepInt * time.Millisecond)
             }
         }
-
+        log.Infof("n: %s",n)
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
