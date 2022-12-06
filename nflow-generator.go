@@ -70,12 +70,7 @@ func main() {
 
 	for {
 		rand.Seed(time.Now().Unix())
-
-		if opts.HighFlow!=""{
-            n := randomNum(10, 40)
-        } else {
-            n := randomNum(50, 1000)
-        }
+        n := randomNum(50, 1000)
 
 		// add spike data
 		if opts.SpikeProto != "" {
@@ -83,6 +78,7 @@ func main() {
 		}
 
         if opts.HighFlow != "" {
+            n = randomNum(10, 40)
             data := GenerateNetflow(30)
             buffer := BuildNFlowPayload(data)
             _, err := conn.Write(buffer.Bytes())
