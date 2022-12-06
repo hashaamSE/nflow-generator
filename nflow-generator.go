@@ -70,7 +70,7 @@ func main() {
 
 	for {
 		rand.Seed(time.Now().Unix())
-        n := randomNum(5, 40)
+        var n
 
 		// add spike data
 		if opts.SpikeProto != "" {
@@ -79,6 +79,7 @@ func main() {
 
         if opts.MaxLoad != "" {
             log.Infof("Max Load")
+            n = randomNum(5, 40)
             data := GenerateNetflow(30)
             buffer := BuildNFlowPayload(data)
             _, err := conn.Write(buffer.Bytes())
@@ -87,6 +88,7 @@ func main() {
             }
         } else {
             log.Infof("NotMax Load")
+            n = randomNum(50, 1000)
             if n > 900 {
                 data := GenerateNetflow(8)
                 buffer := BuildNFlowPayload(data)
