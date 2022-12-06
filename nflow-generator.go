@@ -85,7 +85,7 @@ func main() {
 //         log.Infof("I am here 3!")
 		if n > 18 {
 		    log.Infof("I am here 3.1!")
-			data := GenerateNetflow(8)
+			data := GenerateNetflow(16)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
@@ -93,7 +93,7 @@ func main() {
 			}
 		} else {
 		    log.Infof("I am here 3.2!")
-			data := GenerateNetflow(16)
+			data := GenerateNetflow(28)
 			buffer := BuildNFlowPayload(data)
 			_, err := conn.Write(buffer.Bytes())
 			if err != nil {
