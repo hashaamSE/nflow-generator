@@ -34,6 +34,7 @@ const (
 var opts struct {
 	CollectorIP   string `short:"t" long:"target" description:"target ip address of the netflow collector"`
 	CollectorPort string `short:"p" long:"port" description:"port number of the target netflow collector"`
+	HighFlow      string `short:"h" long:"highflow" description:"bool variable to increase data flow of netflow-generator"`
 	SpikeProto    string `short:"s" long:"spike" description:"run a second thread generating a spike for the specified protocol"`
 	Help          bool   `short:"h" long:"help" description:"show nflow-generator help"`
 }
@@ -62,53 +63,59 @@ func main() {
 	if err != nil {
 		log.Fatal("Error connecting to the target collector: ", err)
 	}
+
 	log.Infof("sending netflow data to a collector ip: %s and port: %s. \n"+
 		"Use ctrl^c to terminate the app.", opts.CollectorIP, opts.CollectorPort)
-    log.Infof("Ver 11!")
-    log.Infof("I am here 1!")
+
+
 	for {
-	    log.Infof("I am here 2!")
 		rand.Seed(time.Now().Unix())
-		n := randomNum(5, 20)
-// 		n := 910
+
+		if opts.HighFlow!=""{
+            n := randomNum(10, 40)
+        }else{
+            n := randomNum(50, 1000)
+        }
 
 		// add spike data
 		if opts.SpikeProto != "" {
 			GenerateSpike()
 		}
-//         data := GenerateNetflow(30)
-//         buffer := BuildNFlowPayload(data)
-//         _, err := conn.Write(buffer.Bytes())
-//         if err != nil {
-//             log.Fatal("Error connecting to the target collector: ", err)
-//         }
-//         log.Infof("I am here 3!")
-		if n > 18 {
-		    log.Infof("I am here 3.1!")
-			data := GenerateNetflow(16)
-			buffer := BuildNFlowPayload(data)
-			_, err := conn.Write(buffer.Bytes())
-			if err != nil {
-				log.Fatal("Error connecting to the target collector: ", err)
-			}
-		} else {
-		    log.Infof("I am here 3.2!")
-			data := GenerateNetflow(28)
-			buffer := BuildNFlowPayload(data)
-			_, err := conn.Write(buffer.Bytes())
-			if err != nil {
-				log.Fatal("Error connecting to the target collector: ", err)
-			}
-		}
-// 		add some periodic spike data
-// 		if n < 150 {
-// 			sleepInt := time.Duration(3000)
-// 			time.Sleep(sleepInt * time.Millisecond)
-// 		}
+
+        if opts.HighFlow!=""{
+            data := GenerateNetflow(30)
+            buffer := BuildNFlowPayload(data)
+            _, err := conn.Write(buffer.Bytes())
+            if err != nil {
+                log.Fatal("Error connecting to the target collector: ", err)
+            }
+        }
+        else {
+            if n > 900 {
+                data := GenerateNetflow(8)
+                buffer := BuildNFlowPayload(data)
+                _, err := conn.Write(buffer.Bytes())
+                if err != nil {
+                    log.Fatal("Error connecting to the target collector: ", err)
+                }
+            } else {
+                data := GenerateNetflow(16)
+                buffer := BuildNFlowPayload(data)
+                _, err := conn.Write(buffer.Bytes())
+                if err != nil {
+                    log.Fatal("Error connecting to the target collector: ", err)
+                }
+            }
+            // add some periodic spike data
+            if n < 150 {
+                sleepInt := time.Duration(3000)
+                time.Sleep(sleepInt * time.Millisecond)
+            }
+        }
+
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
-	log.Infof("I am here 5!")
 }
 
 func randomNum(min, max int) int {
@@ -124,6 +131,7 @@ Usage:
 Application Options:
   -t, --target= target ip address of the netflow collector
   -p, --port=   port number of the target netflow collector
+  -h, --highflow= bool variable (True/False) to increase the flow/min of netflow generator
   -s, --spike run a second thread generating a spike for the specified protocol
     protocol options are as follows:
         ftp - generates tcp/21

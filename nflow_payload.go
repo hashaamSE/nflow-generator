@@ -85,7 +85,6 @@ func BuildNFlowPayload(data Netflow) bytes.Buffer {
 
 //Generate a netflow packet w/ user-defined record count
 func GenerateNetflow(recordCount int) Netflow {
-    log.Infof("Record Count: %s\n",recordCount)
 	data := new(Netflow)
 	header := CreateNFlowHeader(recordCount)
 	records := []NetflowPayload{}
@@ -93,10 +92,8 @@ func GenerateNetflow(recordCount int) Netflow {
 		// overwrite payload to add some variations for traffic spikes.
 		records = CreateVariablePayload(recordCount)
 	} else {
-	    log.Infof("Static Payload")
 		records = CreateNFlowPayload(recordCount)
 	}
-//     log.Infof("Records: %s\n",records)
 	data.Header = header
 	data.Records = records
 	return *data
@@ -137,9 +134,27 @@ func CreateVariablePayload(recordCount int) []NetflowPayload {
 func CreateNFlowPayload(recordCount int) []NetflowPayload {
 	payload := make([]NetflowPayload, recordCount)
 
-	for i := 0; i < recordCount; i++ {
+	payload[0] = CreateHttpFlow()
+    payload[1] = CreateHttpsFlow()
+    payload[2] = CreateHttpAltFlow()
+    payload[3] = CreateDnsFlow()
+    payload[4] = CreateNtpFlow()
+    payload[5] = CreateImapsFlow()
+    payload[6] = CreateMySqlFlow()
+    payload[7] = CreateRandomFlow()
+    payload[8] = CreateSshFlow()
+    payload[9] = CreateP2pFlow()
+    payload[10] = CreateBitorrentFlow()
+    payload[11] = CreateFTPFlow()
+    payload[12] = CreateSnmpFlow()
+    payload[13] = CreateIcmpFlow()
+    payload[14] = CreateRandomFlow()
+    payload[15] = CreateRandomFlow()
+
+	for i := 16; i < recordCount; i++ {
 		payload[i] = CreateRandomFlow()
 	}
+
 // 	payload[0] = CreateHttpFlow()
 //     payload[1] = CreateHttpsFlow()
 //     payload[2] = CreateHttpAltFlow()
