@@ -148,10 +148,8 @@ func CreateNFlowPayload(recordCount int) []NetflowPayload {
     payload[11] = CreateFTPFlow()
     payload[12] = CreateSnmpFlow()
     payload[13] = CreateIcmpFlow()
-    payload[14] = CreateRandomFlow()
-    payload[15] = CreateRandomFlow()
 
-	for i := 16; i < recordCount; i++ {
+	for i := 14; i < recordCount; i++ {
 		payload[i] = CreateRandomFlow()
 	}
 

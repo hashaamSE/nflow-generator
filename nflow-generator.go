@@ -72,53 +72,45 @@ func main() {
 // 		rand.Seed(time.Now().Unix())
         var n = 1
 
-        n = randomNum(5, 20)
-        data := GenerateNetflow(30)
-        buffer := BuildNFlowPayload(data)
-        _, err := conn.Write(buffer.Bytes())
-        if err != nil {
-            log.Fatal("Error connecting to the target collector: ", err)
+		// add spike data
+		if opts.SpikeProto != "" {
+			GenerateSpike()
+		}
+
+        if opts.MaxLoad != "" {
+
+            n = randomNum(5, 20)
+            data := GenerateNetflow(30)
+            buffer := BuildNFlowPayload(data)
+            _, err := conn.Write(buffer.Bytes())
+            if err != nil {
+                log.Fatal("Error connecting to the target collector: ", err)
+            }
+        } else {
+
+            n = randomNum(50, 1000)
+            if n > 900 {
+                data := GenerateNetflow(8)
+                buffer := BuildNFlowPayload(data)
+                _, err := conn.Write(buffer.Bytes())
+                if err != nil {
+                    log.Fatal("Error connecting to the target collector: ", err)
+                }
+            } else {
+                data := GenerateNetflow(16)
+                buffer := BuildNFlowPayload(data)
+                _, err := conn.Write(buffer.Bytes())
+                if err != nil {
+                    log.Fatal("Error connecting to the target collector: ", err)
+                }
+            }
+            // add some periodic spike data
+            if n < 150 {
+                sleepInt := time.Duration(3000)
+                time.Sleep(sleepInt * time.Millisecond)
+            }
         }
 
-		// add spike data
-// 		if opts.SpikeProto != "" {
-// 			GenerateSpike()
-// 		}
-
-//         if opts.MaxLoad != "" {
-//             log.Infof("Max Load")
-//             n = randomNum(5, 20)
-//             data := GenerateNetflow(30)
-//             buffer := BuildNFlowPayload(data)
-//             _, err := conn.Write(buffer.Bytes())
-//             if err != nil {
-//                 log.Fatal("Error connecting to the target collector: ", err)
-//             }
-//         } else {
-//             log.Infof("NotMax Load")
-//             n = randomNum(50, 1000)
-//             if n > 900 {
-//                 data := GenerateNetflow(8)
-//                 buffer := BuildNFlowPayload(data)
-//                 _, err := conn.Write(buffer.Bytes())
-//                 if err != nil {
-//                     log.Fatal("Error connecting to the target collector: ", err)
-//                 }
-//             } else {
-//                 data := GenerateNetflow(16)
-//                 buffer := BuildNFlowPayload(data)
-//                 _, err := conn.Write(buffer.Bytes())
-//                 if err != nil {
-//                     log.Fatal("Error connecting to the target collector: ", err)
-//                 }
-//             }
-//             // add some periodic spike data
-//             if n < 150 {
-//                 sleepInt := time.Duration(3000)
-//                 time.Sleep(sleepInt * time.Millisecond)
-//             }
-//         }
-//         log.Infof("n: %s",n)
 		sleepInt := time.Duration(n)
 		time.Sleep(sleepInt * time.Millisecond)
 	}
