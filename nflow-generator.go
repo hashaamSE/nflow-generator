@@ -69,7 +69,7 @@ func main() {
 
 
 	for {
-		rand.Seed(time.Now().Unix())
+// 		rand.Seed(time.Now().Unix())
         var n = 1
 
         n = randomNum(5, 20)
