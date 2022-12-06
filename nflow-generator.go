@@ -69,7 +69,7 @@ func main() {
 	for {
 	    log.Infof("I am here 2!")
 		rand.Seed(time.Now().Unix())
-		n := randomNum(10, 40)
+		n := randomNum(5, 20)
 // 		n := 910
 
 		// add spike data
@@ -83,7 +83,7 @@ func main() {
 //             log.Fatal("Error connecting to the target collector: ", err)
 //         }
 //         log.Infof("I am here 3!")
-		if n > 30 {
+		if n > 18 {
 		    log.Infof("I am here 3.1!")
 			data := GenerateNetflow(8)
 			buffer := BuildNFlowPayload(data)
