@@ -134,24 +134,24 @@ func CreateVariablePayload(recordCount int) []NetflowPayload {
 func CreateNFlowPayload(recordCount int) []NetflowPayload {
 	payload := make([]NetflowPayload, recordCount)
 
-// 	payload[0] = CreateHttpFlow()
-//     payload[1] = CreateHttpsFlow()
-//     payload[2] = CreateHttpAltFlow()
-//     payload[3] = CreateDnsFlow()
-//     payload[4] = CreateNtpFlow()
-//     payload[5] = CreateImapsFlow()
-//     payload[6] = CreateMySqlFlow()
-//     payload[7] = CreateRandomFlow()
-//     payload[8] = CreateSshFlow()
-//     payload[9] = CreateP2pFlow()
-//     payload[10] = CreateBitorrentFlow()
-//     payload[11] = CreateFTPFlow()
-//     payload[12] = CreateSnmpFlow()
-//     payload[13] = CreateIcmpFlow()
-//     payload[14] = CreateRandomFlow()
-//     payload[15] = CreateRandomFlow()
+	payload[0] = CreateHttpFlow()
+    payload[1] = CreateHttpsFlow()
+    payload[2] = CreateHttpAltFlow()
+    payload[3] = CreateDnsFlow()
+    payload[4] = CreateNtpFlow()
+    payload[5] = CreateImapsFlow()
+    payload[6] = CreateMySqlFlow()
+    payload[7] = CreateRandomFlow()
+    payload[8] = CreateSshFlow()
+    payload[9] = CreateP2pFlow()
+    payload[10] = CreateBitorrentFlow()
+    payload[11] = CreateFTPFlow()
+    payload[12] = CreateSnmpFlow()
+    payload[13] = CreateIcmpFlow()
+    payload[14] = CreateRandomFlow()
+    payload[15] = CreateRandomFlow()
 
-	for i := 0; i < recordCount; i++ {
+	for i := 16; i < recordCount; i++ {
 		payload[i] = CreateRandomFlow()
 	}
 
