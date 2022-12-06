@@ -70,7 +70,7 @@ func main() {
 
 	for {
 		rand.Seed(time.Now().Unix())
-        n := randomNum(50, 1000)
+        n := randomNum(5, 40)
 
 		// add spike data
 		if opts.SpikeProto != "" {
@@ -78,7 +78,7 @@ func main() {
 		}
 
         if opts.MaxLoad != "" {
-            n = randomNum(10, 40)
+            log.Infof("Max Load")
             data := GenerateNetflow(30)
             buffer := BuildNFlowPayload(data)
             _, err := conn.Write(buffer.Bytes())
@@ -86,6 +86,7 @@ func main() {
                 log.Fatal("Error connecting to the target collector: ", err)
             }
         } else {
+            log.Infof("NotMax Load")
             if n > 900 {
                 data := GenerateNetflow(8)
                 buffer := BuildNFlowPayload(data)
