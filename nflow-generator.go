@@ -80,7 +80,7 @@ func main() {
 
         if opts.MaxLoad != "" {
 
-            n = randomNum(5, 20)
+            n = randomNum(3, 15)
             data := GenerateNetflow(16)
             buffer := BuildNFlowPayload(data)
             _, err := conn.Write(buffer.Bytes())
