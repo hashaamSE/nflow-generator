@@ -78,7 +78,7 @@ func main() {
 			GenerateSpike()
 		}
 
-        if opts.MaxLoad != "high" {
+        if opts.MaxLoad == "high" {
 
             n = randomNum(3, 15)
             data := GenerateNetflow(16)
@@ -87,7 +87,7 @@ func main() {
             if err != nil {
                 log.Fatal("Error connecting to the target collector: ", err)
             }
-        } else if opts.MaxLoad != "medium" {
+        } else if opts.MaxLoad == "medium" {
 
             n = randomNum(25, 100)
             data := GenerateNetflow(16)
